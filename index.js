@@ -1,6 +1,6 @@
 const core = require('@actions/core');
 const exec = require('@actions/exec');
-
+const io = require('@actions/io');
 
 // most @actions toolkit packages have async methods
 async function run() {
@@ -25,12 +25,19 @@ async function run() {
         commandErr += data.toString();
       }
     };
-    await exec.exec('cdk', [cdkCommand], options);
-    console.log(`Command Output: ${commandOut}`);
-    console.log(`Command Error: ${commandErr}`)
+    let exitCode = await exec.exec('cdk', [cdkCommand], options);
+    console.log(`\nCommand Output:\n ${commandOut}`);
+    console.log(`Command Error:\n ${commandErr}`)
 
     // Set CDK CLI Output
-    core.setOutput('status_code', '0');
+    core.setOutput('status_code', exitCode.toString());
+
+    //Find Python
+    const pythonPath = await io.which('python', true);
+    console.log(pythonPath);
+
+    const javaPath = await io.which('java', true);
+    console.log(javaPath);
   } catch (error) {
     core.setFailed(error.message);
   }

@@ -4,7 +4,23 @@ on:
   push:
     branches:
       - main
-      - 'releases/*'
+  workflow_dispatch:
+    inputs:
+      cdk_version:
+        type: choice
+        description: 'Version of CDK to Install'
+        options:
+          - 'latest'
+          - '2.2.0'
+        required: false
+        default: 'latest'
+      cdk_command:
+        type: choice
+        description: 'CDK Command to execute'
+        required: false
+        default: 'help'
+        options:
+          - 'help'
 
 jobs:
   # test action works running from the graph
@@ -15,4 +31,4 @@ jobs:
     - uses: ./
       with:
         cdk_version: '2.2.0'
-        
+        cdk_command: 'help'        

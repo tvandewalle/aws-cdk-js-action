@@ -5,6 +5,10 @@ inputs:
     description: 'Version of AWS CDK to install'
     required: false
     default: 'latest'
+  cdk_command:
+    description: 'CDK Command to execute'
+    required: true
+    default: 'help'
 outputs:
   status_code:
     description: 'Status code of AWS CDK CLI'

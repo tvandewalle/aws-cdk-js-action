@@ -1,13 +1,13 @@
-name: 'Wait'
-description: 'Wait a designated number of milliseconds'
+name: 'AWS CDK Action'
+description: 'Run AWS CDK Commands'
 inputs:
-  milliseconds:  # id of input
-    description: 'number of milliseconds to wait'
-    required: true
-    default: '1000'
+  cdk_version:  
+    description: 'Version of AWS CDK to install'
+    required: false
+    default: 'latest'
 outputs:
-  time: # output will be available to future steps
-    description: 'The current time after waiting'
+  status_code:
+    description: 'Status code of AWS CDK CLI'
 runs:
   using: 'node12'
   main: 'dist/index.js'

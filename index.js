@@ -1,18 +1,18 @@
 const core = require('@actions/core');
-const wait = require('./wait');
+const exec = require('@actions/exec');
 
 
 // most @actions toolkit packages have async methods
 async function run() {
   try {
-    const ms = core.getInput('milliseconds');
-    core.info(`Waiting ${ms} milliseconds ...`);
+    // Get inputs
+    const cdkVersion = core.getInput('cdk_version');
 
-    core.debug((new Date()).toTimeString()); // debug is only output if you set the secret `ACTIONS_RUNNER_DEBUG` to true
-    await wait(parseInt(ms));
-    core.info((new Date()).toTimeString());
+    // Install AWS CDK
+    await exec.exec(`npm install -g aws-cdk@${cdkVersion}`);
 
-    core.setOutput('time', new Date().toTimeString());
+    // Set CDK CLI Output
+    core.setOutput('status_code', '0');
   } catch (error) {
     core.setFailed(error.message);
   }

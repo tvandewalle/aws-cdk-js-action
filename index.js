@@ -34,16 +34,15 @@ async function run() {
 
     // Comment on Pull Request
     if (github.context.eventName == "pull_request") {
-      github.rest.issues.createComment({
+      const octokit = github.getOctokit(process.env.GITHUB_TOKEN);
+      await octokit.rest.issues.createComment({
         issue_number: github.context.issue.number,
         owner: github.context.repo.owner,
         repo: github.context.repo.repo,
         body: commandOut,
+
       });
     }
-    const payload = JSON.stringify(github.context.payload, undefined, 2)
-    console.log(`The event payload: ${payload}`);
-
   } catch (error) {
     core.setFailed(error.message);
   }

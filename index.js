@@ -46,14 +46,7 @@ async function run() {
 
     // Comment on Pull Request
     if (github.context.eventName == "pull_request" && prComments) {
-      let commentBody = `<details><summary>Show Details</summary>
-     
-      \`\`\`
-      ${commandOut}
-      \`\`\`
-
-      </details>`;
-
+      let commentBody = `<details><summary>Show Details</summary>\n\n\`\`\`${commandOut}\n\n\`\`\`</details>`;
       const octokit = github.getOctokit(process.env.GITHUB_TOKEN);
       await octokit.rest.issues.createComment({
         issue_number: github.context.issue.number,

@@ -59,7 +59,7 @@ async function run() {
         issue_number: github.context.issue.number,
         owner: github.context.repo.owner,
         repo: github.context.repo.repo,
-        body: commandOut,
+        body: commentBody,
       });
     }
   } catch (error) {

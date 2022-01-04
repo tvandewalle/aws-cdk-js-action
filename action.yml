@@ -9,6 +9,18 @@ inputs:
     description: 'CDK Command to execute'
     required: true
     default: 'help'
+  cdk_args:
+    description: 'Arguments for CDK Command'
+    required: false
+    default: ''
+  cdk_language:
+    description: 'Language for the CDK project'
+    required: false
+    default: 'typescript'
+  pr_comments:
+    description: 'If enabled CDK output will be on PR Comment for PRs'
+    required: false
+    default: true
 outputs:
   status_code:
     description: 'Status code of AWS CDK CLI'

@@ -33,8 +33,10 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - uses: ./
-#      env:
-#        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      env:
+        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
       with:
         cdk_version: '2.2.0'
-        cdk_command: 'help'        
+        cdk_command: 'help'
+        cdk_arguments: '--version'
+        pr_comments: true

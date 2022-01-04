@@ -9768,8 +9768,6 @@ async function run() {
     core.setOutput('status_code', exitCode.toString());
 
     // Comment on Pull Request
-    console.log(`\nEVENT NAME: ${github.context.eventName}\n`);
-
     if (github.context.eventName == "pull_request") {
       const octokit = github.getOctokit(process.env.GITHUB_TOKEN);
       await octokit.rest.issues.createComment({

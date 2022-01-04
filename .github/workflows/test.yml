@@ -38,5 +38,5 @@ jobs:
       with:
         cdk_version: '2.2.0'
         cdk_command: 'help'
-        cdk_arguments: '--version'
+        cdk_args: '--version'
         pr_comments: true

@@ -10,7 +10,7 @@ async function run() {
     const cdkVersion = core.getInput('cdk_version');
     const cdkCommand = core.getInput('cdk_command');
     const prComments = core.getBooleanInput('pr_comments');
-    const cdkArguments = core.getInput('cdk_arguments'); 
+    const cdkArguments = core.getInput('cdk_args'); 
     const cdkLanguage = core.getInput('cdk_language');
 
     // Install AWS CDK

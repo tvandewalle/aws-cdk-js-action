@@ -33,6 +33,14 @@ async function run() {
     core.setOutput('status_code', exitCode.toString());
 
     // Comment on Pull Request
+    if (github.context.eventName == "pull_request") {
+      github.rest.issues.createComment({
+        issue_number: github.context.issue.number,
+        owner: github.context.repo.owner,
+        repo: github.context.repo.repo,
+        body: commandOut,
+      });
+    }
     const payload = JSON.stringify(github.context.payload, undefined, 2)
     console.log(`The event payload: ${payload}`);
 

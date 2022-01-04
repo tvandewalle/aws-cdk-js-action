@@ -36,7 +36,5 @@ jobs:
       env:
         GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
       with:
-        cdk_version: '2.2.0'
         cdk_command: 'help'
-        cdk_args: '--version'
         pr_comments: true

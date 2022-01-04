@@ -28,7 +28,6 @@ async function run() {
 
     // Run Command
     let commandOut = '';
-    let commandErr = '';
 
     const options = {};
     options.listeners = {
@@ -36,7 +35,7 @@ async function run() {
         commandOut += data.toString();
       },
       stderr: (data) => {
-        commandErr += data.toString();
+        commandOut += data.toString();
       }
     };
     let exitCode = await exec.exec('cdk', [cdkCommand].concat(cdkArguments.split(' ')), options);

@@ -39,7 +39,7 @@ async function run() {
         commandErr += data.toString();
       }
     };
-    let exitCode = await exec.exec('cdk', [cdkCommand], options);
+    let exitCode = await exec.exec('cdk', [cdkCommand].concat(cdkArguments.split(' ')), options);
 
     // Set CDK CLI Output
     core.setOutput('status_code', exitCode.toString());

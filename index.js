@@ -41,11 +41,15 @@ async function run() {
     let exitCode = await exec.exec('cdk', [cdkCommand].concat(cdkArguments.split(' ')), options);
 
     // Set CDK CLI Output
-    core.setOutput('status_code', exitCode.toString());
+    core.setOutput('exit_code', exitCode.toString());
 
     // Comment on Pull Request
     if (github.context.eventName == "pull_request" && prComments) {
-      let commentBody = `<details><summary>Show Details</summary>\n\n\`\`\`\n${commandOut}\n\`\`\`\n</details>`;
+      let summaryStatus = 'Success';
+      if (exitCode != 0) {
+        summaryStatus = 'Failure';
+      }
+      let commentBody = `<details><summary>${summaryStatus} - Show Details</summary>\n\n\`\`\`\n${commandOut}\n\`\`\`\n</details>`;
       const octokit = github.getOctokit(process.env.GITHUB_TOKEN);
       await octokit.rest.issues.createComment({
         issue_number: github.context.issue.number,

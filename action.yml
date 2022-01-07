@@ -1,18 +1,21 @@
 name: 'AWS CDK Action'
 description: 'Run AWS CDK Commands'
 inputs:
-  cdk_version:  
-    description: 'Version of AWS CDK to install'
-    required: false
-    default: 'latest'
   cdk_command:
     description: 'CDK Command to execute'
     required: true
-    default: 'help'
   cdk_args:
     description: 'Arguments for CDK Command'
     required: false
     default: ''
+  working_dir:
+    description: 'AWS CDK Working Directory'
+    required: false
+    default: '.'
+  cdk_version:  
+    description: 'Version of AWS CDK to install'
+    required: false
+    default: 'latest'
   cdk_language:
     description: 'Language for the CDK project'
     required: false
@@ -22,8 +25,8 @@ inputs:
     required: false
     default: true
 outputs:
-  status_code:
-    description: 'Status code of AWS CDK CLI'
+  exit_code:
+    description: 'Exit code of AWS CDK CLI'
 runs:
   using: 'node12'
   main: 'dist/index.js'
